@@ -1,22 +1,21 @@
-﻿using HotelProject.WebUI.Dtos.SubscribeDto;
-using HotelProject.WebUI.Dtos.TestimonialDto;
+﻿using HotelProject.WebUI.Dtos.BookingDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelProject.WebUI.Controllers
 {
-    public class DefaultController : Controller
+    public class BookingController : Controller
     {
-
         private readonly IHttpClientFactory _httpClientFactory;
-        public DefaultController(IHttpClientFactory httpClientFactory)
+
+        public BookingController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
+
 
         public IActionResult Index()
         {
@@ -25,23 +24,20 @@ namespace HotelProject.WebUI.Controllers
 
 
         [HttpGet]
-        public PartialViewResult _SubscribePartial()
+        public PartialViewResult AddBooking()
         {
             return PartialView();
         }
+
         [HttpPost]
-        public async Task<IActionResult> _SubscribePartial(CreateSubscribeDto createSubscribe)
+        public async Task<IActionResult> AddBooking(CreateBookingDto createBookingDto)
         {
-
-
             var client = _httpClientFactory.CreateClient();
-            var jsondata = JsonConvert.SerializeObject(createSubscribe);
+            var jsondata = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsondata, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("http://localhost:35160/api/Subscribe", stringContent);
-
+            await client.PostAsync("http://localhost:35160/api/Booking", stringContent);
             return RedirectToAction("Index", "Default");
-
-
+ 
         }
     }
 }

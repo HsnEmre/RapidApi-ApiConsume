@@ -13,6 +13,11 @@ namespace HotelProject.BussinessLayer.Concrete
     {
         private readonly IAboutDal _aboutdal;
 
+        public AboutManager(IAboutDal aboutDal)
+        {
+            _aboutdal = aboutDal;
+        }
+
         public void TDelete(About entity)
         {
             _aboutdal.Delete(entity);
@@ -25,7 +30,16 @@ namespace HotelProject.BussinessLayer.Concrete
 
         public List<About> TGetList()
         {
-           return _aboutdal.GetList();
+            try
+            {
+                return _aboutdal.GetList();
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
         }
 
         public void TInsert(About entity)

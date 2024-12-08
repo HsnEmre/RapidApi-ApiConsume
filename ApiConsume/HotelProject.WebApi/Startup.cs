@@ -48,11 +48,13 @@ namespace HotelProject.WebApi
             services.AddScoped<IRoomDal, EfRoomDal>();
             services.AddScoped<IRoomService, RoomManager>();
 
-            //services.AddScoped<IAboutDal, EfAboutDal>();    
-            //services.AddScoped<IAboutService,AboutManager>();
+            services.AddScoped<IAboutDal, EfAboutDal>();
+            services.AddScoped<IAboutService, AboutManager>();
 
-            services.AddScoped<IAboutDal,EfAboutDal>();
-            services.AddScoped<IAboutService,AboutManager>();
+
+            services.AddScoped<IBookingDal, EFBookingDal>();
+            services.AddScoped<IBookingService, BookingManager>();
+
 
 
 

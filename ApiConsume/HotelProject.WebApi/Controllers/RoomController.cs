@@ -12,6 +12,10 @@ namespace HotelProject.WebApi.Controllers
 
         private readonly IRoomService _roomservice;
 
+        public RoomController(IRoomService roomService)
+        {
+            _roomservice = roomService;
+        }
 
         [HttpGet]
         public IActionResult RoomList()
@@ -26,7 +30,7 @@ namespace HotelProject.WebApi.Controllers
             _roomservice.TInsert(room);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteRoom(int id)
         {
             var values = _roomservice.TGetById(id);
