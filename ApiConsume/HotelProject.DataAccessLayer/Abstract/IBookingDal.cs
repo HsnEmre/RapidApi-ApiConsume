@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace HotelProject.DataAccessLayer.Abstract
 {
-    public interface IBookingDal:IGenericDal<Booking>
+    public interface IBookingDal : IGenericDal<Booking>
     {
+        void BookingStatuschangeApproved(Booking booking);
+        void BookingStatuschangeApproved2(int id);
     }
 }

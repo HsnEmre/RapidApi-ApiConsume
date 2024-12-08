@@ -9,6 +9,7 @@ namespace HotelProject.BussinessLayer.Abstract
 {
     public interface IBookingService:IGenericService<Booking>
     {
-
+        void TBookinStatusChangeApproved(Booking booking);
+        void TBookinStatusChangeApproved2(int id);
     }
 }

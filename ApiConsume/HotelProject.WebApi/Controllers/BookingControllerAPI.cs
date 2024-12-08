@@ -6,10 +6,10 @@ namespace HotelProject.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookingController : Controller
+    public class BookingControllerAPI : Controller
     {
         private readonly IBookingService _booking;
-        public BookingController(IBookingService serviceService)
+        public BookingControllerAPI(IBookingService serviceService)
         {
             _booking = serviceService;
         }
@@ -38,7 +38,7 @@ namespace HotelProject.WebApi.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPut("UpdateBooking")]
         public IActionResult UpdateBooking(Booking book)
         {
             _booking.TUpdate(book);
@@ -52,6 +52,21 @@ namespace HotelProject.WebApi.Controllers
         {
             var values = _booking.TGetById(id);
             return Ok(values);
+        }
+
+        [HttpPut("aaaaaaa")]
+        public IActionResult aaaaaaa(Booking booking)
+        {
+            _booking.TBookinStatusChangeApproved(booking);
+            return Ok();
+
+        }
+        [HttpPut("bbbbbb")]
+        public IActionResult bbbbbb(int id)
+        {
+            _booking.TBookinStatusChangeApproved2(2);
+            return Ok();
+
         }
 
     }
