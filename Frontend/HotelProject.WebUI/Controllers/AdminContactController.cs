@@ -45,6 +45,14 @@ namespace HotelProject.WebUI.Controllers
                 return View(values);
             }
             return View();
+
+            //yeni bir şeyler yapıldı
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
 
