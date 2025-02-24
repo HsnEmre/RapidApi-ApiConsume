@@ -58,6 +58,9 @@ namespace HotelProject.WebApi
             services.AddScoped<IContactDal, EfContactDal>();
             services.AddScoped<IContactService, ContactManager>();
 
+            services.AddScoped<IContactDal, EfContactDal>();
+            services.AddScoped<IContactService, ContactManager>();
+
 
             services.AddScoped<IGuestDal, EFGuestDal>();
             services.AddScoped<IGuestService, GuestManager>();
@@ -65,6 +68,8 @@ namespace HotelProject.WebApi
 
             services.AddScoped<ISendMessageDal,EFSendMessageDal>();
             services.AddScoped<ISendMessageService, SendMessageManager>();
+            services.AddScoped<IGuestDal, EFGuestDal>();
+            services.AddScoped<IGuestService, GuestManager>();
 
 
 

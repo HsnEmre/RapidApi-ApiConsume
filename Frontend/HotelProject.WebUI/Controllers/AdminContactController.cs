@@ -77,7 +77,7 @@ namespace HotelProject.WebUI.Controllers
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("http://localhost:35160/api/SendMessage", stringContent);
             if (responseMessage.IsSuccessStatusCode)
-            {
+        {
                 return RedirectToAction("Index");
             }
             return View();
