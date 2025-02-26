@@ -46,13 +46,7 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
 
-            //yeni bir şeyler yapıldı
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
+            
         }
 
 
@@ -71,13 +65,13 @@ namespace HotelProject.WebUI.Controllers
             model.SenderName = "admin";
             model.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
 
-            
+
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("http://localhost:35160/api/SendMessage", stringContent);
             if (responseMessage.IsSuccessStatusCode)
-        {
+            {
                 return RedirectToAction("Index");
             }
             return View();
@@ -93,6 +87,37 @@ namespace HotelProject.WebUI.Controllers
         public PartialViewResult SideBarAdmibContactCategoryPartial()
         {
             return PartialView();
+        }
+
+
+        public async Task<IActionResult> MesssageDetailsBySendBox(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:35160/api/SendMessage/id?/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData=await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<GetMessageByIdDto>(jsonData);
+                return View(values);
+            }
+
+
+            return View();
+        }
+
+        public async Task<IActionResult> MesssageDetailsByInbox(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:35160/api/Contact/id?/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<InboxContactDto>(jsonData);
+                return View(values);
+            }
+
+
+            return View();
         }
     }
 }
