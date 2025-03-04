@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Validation Rules\RoomValidationRules\" />
-    <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

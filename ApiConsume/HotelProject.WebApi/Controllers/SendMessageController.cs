@@ -14,7 +14,7 @@ namespace HotelProject.WebApi.Controllers
 
         public SendMessageController(ISendMessageService service)
         {
-                _sendMesageService = service;
+            _sendMesageService = service;
         }
 
 
@@ -22,7 +22,7 @@ namespace HotelProject.WebApi.Controllers
         [HttpGet]
         public IActionResult SendMessageList()
         {
-             var values=_sendMesageService.TGetList();
+            var values = _sendMesageService.TGetList();
             return Ok(values);
         }
 
@@ -37,7 +37,7 @@ namespace HotelProject.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteSendMessage(int id)
         {
-            var values=_sendMesageService.TGetById(id);
+            var values = _sendMesageService.TGetById(id);
             _sendMesageService.TDelete(values);
             return Ok();
         }
@@ -55,6 +55,13 @@ namespace HotelProject.WebApi.Controllers
             var values = _sendMesageService.TGetById(id);
             return Ok(values);
         }
+
+        [HttpGet("GetSendMessageCount")]
+        public IActionResult GetSendMessageCount()
+        {
+            return Ok(_sendMesageService.TGetSendMessageCount());
+        }
+
 
     }
 }

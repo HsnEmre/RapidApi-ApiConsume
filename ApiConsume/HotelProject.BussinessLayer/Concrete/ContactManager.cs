@@ -19,12 +19,17 @@ namespace HotelProject.BussinessLayer.Concrete
         }
         public void TDelete(Contact entity)
         {
-           
+
         }
 
         public Contact TGetById(int id)
         {
             return _contactDal.GetByID(id);
+        }
+
+        public int TGetContactCount()
+        {
+            return _contactDal.GetContactCount();
         }
 
         public List<Contact> TGetList()

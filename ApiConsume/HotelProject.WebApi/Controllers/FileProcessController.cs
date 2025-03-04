@@ -1,30 +1,26 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.IO;
 using System.Threading.Tasks;
+using System;
 
 namespace HotelProject.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FileImageController : ControllerBase
+    public class FileProcessController : ControllerBase
     {
-        private readonly IWebHostEnvironment _env;
 
-        public FileImageController(IWebHostEnvironment env)
-        {
-            _env = env;
-        }
+
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
         {
 
 
             var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "images\\" + fileName);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Files\\" + fileName);
 
             var stream = new FileStream(path, FileMode.Create);
 
@@ -36,7 +32,6 @@ namespace HotelProject.WebApi.Controllers
 
 
         }
+
     }
 }
-
-

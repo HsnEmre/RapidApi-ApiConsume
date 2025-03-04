@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelProject.WebUI.Controllers
 {
-    public class AdminImageFile : Controller
+    public class AdminFileController : Controller
     {
         [HttpGet]
         public IActionResult Index()
@@ -32,8 +32,8 @@ namespace HotelProject.WebUI.Controllers
 
 
             var httpclient = new HttpClient();
-            await httpclient.PostAsync("http://localhost:35160/api/FileImage", multipartFormDataContent);
-        
+            await httpclient.PostAsync("http://localhost:35160/api/FileProcess", multipartFormDataContent);
+
 
 
             return View();

@@ -25,13 +25,33 @@ namespace HotelProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:35160/api/Contact");
+
+
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:35160/api/Contact/GetContactCount/");
+
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client2.GetAsync("http://localhost:35160/api/Contact/GetSendMessage/");
+
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);
+                
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.contactCount = jsonData2;
+
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.senMessageCount = jsonData3;
                 return View(values);
             }
+
+            
             return View();
+
+           
+
         }
 
         public async Task<IActionResult> SendBox()
@@ -46,7 +66,7 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
 
-            
+
         }
 
 
@@ -74,14 +94,16 @@ namespace HotelProject.WebUI.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View();
 
+            return View();
         }
 
 
 
-        public PartialViewResult SideBarAdmibContactPartial()
+        public async Task<PartialViewResult> SideBarAdmibContactPartial()
         {
+
+
             return PartialView();
         }
         public PartialViewResult SideBarAdmibContactCategoryPartial()
@@ -96,7 +118,7 @@ namespace HotelProject.WebUI.Controllers
             var responseMessage = await client.GetAsync($"http://localhost:35160/api/SendMessage/id?/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
-                var jsonData=await responseMessage.Content.ReadAsStringAsync();
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<GetMessageByIdDto>(jsonData);
                 return View(values);
             }
@@ -119,5 +141,19 @@ namespace HotelProject.WebUI.Controllers
 
             return View();
         }
+
+        //public async Task<IActionResult> GetContactCount()
+        //{
+        //    var client = _httpClientFactory.CreateClient();
+        //    var responseMessage = await client.GetAsync($"http://localhost:35160/api/Contact/GetContactCount/");
+        //    if (responseMessage.IsSuccessStatusCode)
+        //    {
+        //        var jsonData = await responseMessage.Content?.ReadAsStringAsync();
+        //        // var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);
+        //        return View();
+        //    }
+
+        //    return View();
+        //}
     }
 }
