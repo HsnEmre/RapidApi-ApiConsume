@@ -66,10 +66,14 @@ namespace HotelProject.WebApi
             services.AddScoped<IGuestService, GuestManager>();
 
 
-            services.AddScoped<ISendMessageDal,EFSendMessageDal>();
+            services.AddScoped<ISendMessageDal, EFSendMessageDal>();
             services.AddScoped<ISendMessageService, SendMessageManager>();
-            services.AddScoped<IGuestDal, EFGuestDal>();
-            services.AddScoped<IGuestService, GuestManager>();
+
+
+            services.AddScoped<IMessageCategoryDal, EfMessageCategoryDal>();
+            services.AddScoped<IMessageCategoryService, MessageCategoryManager>();
+
+
 
 
 

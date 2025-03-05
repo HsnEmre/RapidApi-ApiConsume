@@ -1,9 +1,11 @@
 ﻿using HotelProject.WebUI.Dtos.BookingDto;
 using HotelProject.WebUI.Dtos.ContactDto;
+using HotelProject.WebUI.Dtos.RoomDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +22,17 @@ namespace HotelProject.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public IActionResult Index()
+        public async IActionResult Index()
         {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:35160/api/MessageCategory");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultroomDto>>(jsondata);
+                return View(values);
+            }
+
             return View();
         }
 
